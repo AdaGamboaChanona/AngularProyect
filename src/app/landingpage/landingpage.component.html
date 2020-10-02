@@ -1,11 +1,22 @@
-<div *ngIf="products.length==0">
-    <p >
-        no hay nada
-    </p>
-</div>
+<div class="body">
+    <div class="tableCenter">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">PRECIO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                <th scope="row">{{product.id}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
 
-<div *ngFor="let product of products">
-    <p>
-        {{product.id}} /  {{product.name}} /  {{product.price}}
-    </p>
 </div>

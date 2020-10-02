@@ -11,13 +11,34 @@ import {ServiceService} from '../service.service'
 
 export class LandingpageComponent implements OnInit {
   products= [];
-  constructor(private serviceService: ServiceService) { }
+  info= "no hay datos";
+  status:boolean=false;
+  name:String='Mostrar';
+  constructor(private serviceService: ServiceService) { };
 
   ngOnInit(): void {
     this.serviceService.getProduct("products/").subscribe((data:any[]) =>{
       console.log(data);
       this.products=data;
     });
+  }
+
+  onClickMe(){
+    
+  }
+
+  onClickClear(){
+    this.products=[];
+  }
+
+  onClickMostrar(){
+    this.status=!this.status;
+    if(this.status){
+      this.name="ocultar"
+    }else {
+      this.name="mostrar"
+    }
+
   }
 
 }

@@ -9,7 +9,8 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
-import {CommonModule} from '@angular/common'
+import {CommonModule} from '@angular/common';
+import { HeaderComponent } from './header/header.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CommonModule} from '@angular/common'
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
