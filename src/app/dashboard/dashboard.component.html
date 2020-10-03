@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<div class="body">
+    <button (click)="showHide()">{{nameButton}}</button>
+</div>
+<div class="body" *ngIf="status">
+    <br>
+    <button (click)="onClickShow()">Buscar</button><br><br>
+    <button (click)="onClickClear()">Limpiar</button>
+    <div *ngIf="products.length === 0">
+        <p>
+            {{ info | uppercase }}
+        </p>
+    </div>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <th scope="row">{{product.id}}</th>
+            <td>{{product.name  | uppercase}}</td>
+            <td>${{product.precio}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+        
+</div>
