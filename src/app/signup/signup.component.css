@@ -1,0 +1,16 @@
+.formulario{
+    width: 55%;
+    height: 65%;
+    margin-left: 300px;
+    color: white;
+    font-size: 20px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-right: 50px;
+    margin-top: 100px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: url('https://www.publicdomainpictures.net/pictures/210000/nahled/brown-haze-background-148573057681m.jpg');
+    background-size: cover;
+    text-align: center;
+}

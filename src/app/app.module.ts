@@ -11,6 +11,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {CommonModule} from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './signup/signup.component'
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from './../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { SignupComponent } from './signup/signup.component'
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

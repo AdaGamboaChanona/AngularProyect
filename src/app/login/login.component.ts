@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from './../Auth/auth.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authSev : AuthService, private router : Router) {}
 
   ngOnInit(): void {
   }
   
-  loginClicked(){}
+  loginClicked(){
+
+  }
+
+  async loginGoogle(){
+    this.authSev.loginGoogle().then((res)=>{
+      this.router.navigate(['/Dashboard'])
+    }).catch((err)=>{console.log(err)})
+  }
 }
