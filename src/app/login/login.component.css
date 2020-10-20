@@ -1,3 +1,27 @@
-    mat-slider {
-        width: 300px;
-      }
+.main-div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(https://image.freepik.com/free-photo/blur-restaurant-cafe-light-color-with-vintage-brown-wood-tabletop-background_42708-394.jpg);
+    background-size: cover;
+}
+
+.login-form{
+    min-width: 150px;
+    max-width: 300px;
+    width: 100;;
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+h1{
+    margin-left: 115px; 
+}
+
+p{
+    margin-left: 135px;
+}
+
