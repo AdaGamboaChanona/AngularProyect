@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
 
   }
 
-  /*async loginGoogle(){
+  async loginGoogle(){
     this.authSev.loginGoogle().then((res)=>{
       this.router.navigate(['/Dashboard'])
     }).catch((err)=>{console.log(err)})
-  }*/
+  }
 }
