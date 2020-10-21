@@ -3,8 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(https://image.freepik.com/free-photo/blur-restaurant-cafe-light-color-with-vintage-brown-wood-tabletop-background_42708-394.jpg);
+    background-image: url(https://images8.alphacoders.com/841/841718.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .login-form{

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from './../Auth/auth.service';
+import {AuthServiceService} from '../Auth/auth-service.service'
 import { Router } from "@angular/router";
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 
@@ -11,9 +11,14 @@ import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginFormGroup:FormGroup;
-  constructor(private authSev : AuthService, 
+  constructor(private authSev : AuthServiceService, 
               private router : Router, 
-              private _formBuilder:FormBuilder) {}
+              private _formBuilder:FormBuilder) {
+                
+                if(authSev.isAuthenticated()){
+                  router.navigate(['Dashboard']);
+                }
+              }
 
   ngOnInit(): void {
     this.loginFormGroup=this._formBuilder.group({
@@ -25,14 +30,23 @@ export class LoginComponent implements OnInit {
   login(){
     const data = this.loginFormGroup.value;
     if (data.user && data.password) {
-      console.log(data.user + "---" + data.password)
+      //console.log(data.user + "---" + data.password)
+      this.authSev.login(data.user,data.password).subscribe(access => {
+        localStorage.setItem('user', JSON.stringify(access));
+        console.log('datos validos')
+        this.router.navigate(['Dashboard']);
+      }, error =>{
+        console.log('datos invalidos')
+      }
+      
+      );
     }
 
   }
 
-  async loginGoogle(){
+  /*async loginGoogle(){
     this.authSev.loginGoogle().then((res)=>{
       this.router.navigate(['/Dashboard'])
     }).catch((err)=>{console.log(err)})
-  }
+  }*/
 }

@@ -1,32 +1,29 @@
-<div class="body">
-    <button (click)="showHide()">{{nameButton}}</button>
-</div>
-<div class="body" *ngIf="status">
-    <br>
-    <button (click)="onClickShow()">Buscar</button><br><br>
-    <button (click)="onClickClear()">Limpiar</button>
-    <div *ngIf="products.length === 0">
-        <p>
-            {{ info | uppercase }}
-        </p>
-    </div>
-<div class="container">
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Precio</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products">
-            <th scope="row">{{product.id}}</th>
-            <td>{{product.name  | uppercase}}</td>
-            <td>${{product.precio}}</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
-        
+<app-header></app-header>
+<div class="main-div">
+  <mat-card>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Weight </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
 </div>

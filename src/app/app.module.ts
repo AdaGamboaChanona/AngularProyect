@@ -20,6 +20,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 
@@ -46,6 +49,9 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms'
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
