@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
-  {path : '', redirectTo: 'home', pathMatch : 'full'},
+  {path : '', redirectTo: 'Login', pathMatch : 'full'},
   {path : 'Landing-page', component: LandingpageComponent},
   {path : 'Login', component: LoginComponent},
   {path : 'Dashboard', component: DashboardComponent},
