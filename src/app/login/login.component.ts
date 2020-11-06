@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   login(){
     const data = this.loginFormGroup.value;
     if (data.user && data.password) {
-      //console.log(data.user + "---" + data.password)
+      console.log(data.user + "---" + data.password)
       this.authSev.login(data.user,data.password).subscribe(access => {
         localStorage.setItem('user', JSON.stringify(access));
         console.log('datos validos')

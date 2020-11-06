@@ -17,7 +17,7 @@ export class LandingpageComponent implements OnInit {
   constructor(private serviceService: ServiceService) { };
 
   ngOnInit(): void {
-    this.serviceService.getProduct("products/").subscribe((data:any[]) =>{
+    this.serviceService.getRegistro().subscribe((data:any[]) =>{
       console.log(data);
       this.products=data;
     });

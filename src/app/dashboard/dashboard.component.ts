@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ServiceService} from '../service.service'
+import {ServiceService} from '../service.service';
+import {FormBuilder,FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,59 +8,76 @@ import {ServiceService} from '../service.service'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-  status :Boolean = false;
+  displayedColumns: string[] = ['No.', 'nombre', 'edad', 'correo', 'editar', 'eliminar'];
+  formRegister : FormGroup;
   products = [];
-  info :String = 'No hay datos';
-  nameButton :String = 'Mostrar';
-  constructor(private serviceService: ServiceService) { }
+  nombreCompleto: string;
+  edad: string;
+  correo: string;
+  update:boolean;
+  id:string;
+  constructor(private serviceService: ServiceService, private _formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
-    
-  }
-  onClickShow(){
-    this.info = "Si hay datos";
-    this.serviceService.getProduct("products/").subscribe((data: any[])=>{
+    this.serviceService.getRegistro().subscribe((data: any[])=>{
       console.log(data);
       this.products = data;
     })
+
+    this.formRegister = this._formBuilder.group({
+      nombreCompleto: ['',Validators.required],
+      edad: ['',Validators.required],
+      correo: ['',Validators.required]
+    })
+    
   }
-  onClickClear(){
-    this.products = [];
-    this.info = "No hay datos";
+  deleteRegistro(id:string):void{
+    console.log(id)
+    this.serviceService.deleteRegistro(id).subscribe(access=>{
+      console.log("Todo bien")
+      window.location.reload();
+    },error=>{
+      console.log("Datos inválidos")
+    })
+    
   }
-  showHide(){
-    if (this.status) {
-      this.nameButton = 'Mostrar';
+
+  addRegistro():void{
+    const data = this.formRegister.value;
+    if (this.update) {
+      if(data.nombreCompleto && data.edad && data.correo){
+        this.serviceService.updateRegistro(this.id,data.nombreCompleto,data.edad,data.correo).subscribe(access=>{
+          window.location.reload();
+          this.update=false;
+        },error=>{
+          console.log("Datos inválidos")
+        })
+      }  
+    
     }else{
-      this.nameButton = 'Ocultar';
+      if(data.nombreCompleto && data.edad && data.correo){
+        this.serviceService.addRegistro(data.nombreCompleto,data.edad,data.correo).subscribe(access=>{
+          window.location.reload();
+        },error=>{
+          console.log("Datos inválidos")
+        })
+      }
     }
-    this.status = !this.status;
+  }
 
-  };
+  updateRegistro(id:string):void{
+    console.log(id);
+    this.serviceService.getSingleRegistro(id).subscribe((data:JSON)=>{
+      let registro = data;
+      this.nombreCompleto = registro['nombreCompleto']
+      this.edad = registro['edad']
+      this.correo = registro['correo']
+      this.update=true;
+      this.id=id;
+    });
 
-  
+  }
 
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];

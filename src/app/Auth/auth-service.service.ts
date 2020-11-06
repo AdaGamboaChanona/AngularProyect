@@ -9,7 +9,7 @@ import { auth, User } from 'firebase/app';
 })
 export class AuthServiceService {
   public user: User;
-  api:String="http://localhost:4200/";
+  api:String="https://back-web-ids-ada-chanona.herokuapp.com/";
   constructor(private httpClient:HttpClient, private afAuth : AngularFireAuth) { }
 
   isAuthenticated():Boolean {
@@ -22,14 +22,41 @@ export class AuthServiceService {
     }
   }
 
-  login(userName:String, password:String):Observable<any> {
+  login(username:String, password:String):Observable<any> {
     const httpOptions={
       headers:new HttpHeaders({
         'Content-Type':'application/json',
       })
     };
-    return this.httpClient.post(`${this.api}api/v1/login/`,{userName, password}, httpOptions)
+    return this.httpClient.post(`${this.api}api/v1/login/`,{username, password}, httpOptions)
   }
+
+  getUser() {
+    let user= JSON.parse(localStorage.getItem('user'));
+    let token= user ['token']
+    const httpOptions={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+ token
+      })
+    };
+    return this.httpClient.get(`${this.api}api/v1/profile/profileModelGeneral_url`, httpOptions)
+  }
+
+  getOneUser(id:String){
+    let user=JSON.parse(localStorage.getItem('user'));
+    let token= user ['token'];
+    const httpOptions={
+      headers:new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+ token
+      })
+    };
+    return this.httpClient.get(`${this.api}api/v1/profile/profileModelGeneral_url`,httpOptions)
+
+  }
+
+
 
   async loginGoogle( ){
     try {
