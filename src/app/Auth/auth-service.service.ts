@@ -8,15 +8,15 @@ import { auth, User } from 'firebase/app';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  public user: User;
+  public usuario: User;
   api:String="https://back-web-ids-ada-chanona.herokuapp.com/";
   constructor(private httpClient:HttpClient, private afAuth : AngularFireAuth) { }
 
   isAuthenticated():Boolean {
-    let user=JSON.parse(localStorage.getItem('user'));
+    let usuario=JSON.parse(localStorage.getItem('user'));
 
-    if (user){
-      return user['token']? true:false
+    if (usuario){
+      return usuario['token']? true:false
     } else{
       return false
     }
@@ -30,8 +30,8 @@ export class AuthServiceService {
     };
     return this.httpClient.post(`${this.api}api/v1/login/`,{username, password}, httpOptions)
   }
-
-  getUser() {
+// registros generales
+  getRegistro() {
     let user= JSON.parse(localStorage.getItem('user'));
     let token= user ['token']
     const httpOptions={
@@ -40,9 +40,22 @@ export class AuthServiceService {
         'Authorization': 'Token '+ token
       })
     };
-    return this.httpClient.get(`${this.api}api/v1/profile/profileModelGeneral_url`, httpOptions)
+    return this.httpClient.get(`${this.api}api/v1/dashboard/registrosGeneralDash/`, httpOptions)
   }
 
+  addRegistro(nombreCompleto: string, edad: string,correo: string):Observable<any>{
+    let user = JSON.parse(localStorage.getItem('user'))
+    let token = user['token']
+    const httpOptions={
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+token
+      })
+    };
+    return this.httpClient.post(`${this.api}api/v1/dashboard/registrosGeneralDash/`,{nombreCompleto,edad,correo},httpOptions);
+  }
+
+  //registros especificos
   getOneUser(id:String){
     let user=JSON.parse(localStorage.getItem('user'));
     let token= user ['token'];
@@ -52,11 +65,33 @@ export class AuthServiceService {
         'Authorization': 'Token '+ token
       })
     };
-    return this.httpClient.get(`${this.api}api/v1/profile/profileModelGeneral_url`,httpOptions)
+    return this.httpClient.get(`${this.api}api/v1/dashboard/registrosEspecificosDash/`,httpOptions)
 
   }
 
+  deleteRegistro(id: string):Observable<any>{
+    let user = JSON.parse(localStorage.getItem('user'))
+    let token = user['token']
+    const httpOptions={
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+token
+      })
+    };
+    return this.httpClient.delete(`${this.api}api/v1/dashboard/registrosEspecificosDash/${id}`,httpOptions);
+  }
 
+  updateRegistro(id: string, nombreCompleto: string, edad:string,correo:string):Observable<any>{
+    let user = JSON.parse(localStorage.getItem('user'))
+    let token = user['token']
+    const httpOptions={
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+token
+      })
+    };
+    return this.httpClient.put(`${this.api}api/v1/dashboard/registrosEspecificosDash/${id}`,{nombreCompleto,edad,correo},httpOptions);
+  }
 
   async loginGoogle( ){
     try {
