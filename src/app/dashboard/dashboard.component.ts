@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ServiceService} from '../service.service';
+import {AuthServiceService} from '../Auth/auth-service.service';
 import {FormBuilder,FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,20 +9,26 @@ import {FormBuilder,FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['No.', 'nombre', 'edad', 'correo', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'edad', 'correo', 'editar', 'eliminar'];
   formRegister : FormGroup;
   products = [];
   nombreCompleto: string;
-  edad: string;
+  edad: Number;
   correo: string;
   update:boolean;
   id:string;
-  constructor(private serviceService: ServiceService, private _formBuilder:FormBuilder) { }
+  constructor(private serviceService: AuthServiceService, private _formBuilder:FormBuilder, private _router:Router) { 
+    if (serviceService.isAuthenticated()==false) {
+      _router.navigate(["/"])
+      
+    }
+  }
 
   ngOnInit(): void {
     this.serviceService.getRegistro().subscribe((data: any[])=>{
       console.log(data);
       this.products = data;
+      this.update=false;
     })
 
     this.formRegister = this._formBuilder.group({
@@ -44,38 +51,43 @@ export class DashboardComponent implements OnInit {
 
   addRegistro():void{
     const data = this.formRegister.value;
-    if (this.update) {
-      if(data.nombreCompleto && data.edad && data.correo){
+      if(data.nombreCompleto && data.edad && data.correo && this.update==true){
         this.serviceService.updateRegistro(this.id,data.nombreCompleto,data.edad,data.correo).subscribe(access=>{
           window.location.reload();
           this.update=false;
+          console.log("cualquier cosa")
         },error=>{
           console.log("Datos inválidos")
         })
       }  
     
-    }else{
-      if(data.nombreCompleto && data.edad && data.correo){
+    
+      if(data.nombreCompleto && data.edad && data.correo && this.update==false){
         this.serviceService.addRegistro(data.nombreCompleto,data.edad,data.correo).subscribe(access=>{
           window.location.reload();
+          console.log("otra cosa")
         },error=>{
           console.log("Datos inválidos")
         })
-      }
+      
     }
   }
 
-  updateRegistro(id:string):void{
-    console.log(id);
-    this.serviceService.getSingleRegistro(id).subscribe((data:JSON)=>{
+  updateButoom(id:string):void{
+    this.serviceService.getOneUser(id).subscribe((data:JSON)=>{
       let registro = data;
+      this.update = true;
+      this.id = registro['id']
       this.nombreCompleto = registro['nombreCompleto']
-      this.edad = registro['edad']
+      this.edad= registro['edad']
       this.correo = registro['correo']
-      this.update=true;
-      this.id=id;
+      this.formRegister = this._formBuilder.group({
+        nombreCompleto: [this.nombreCompleto],
+        edad: [this.edad],
+        correo: [this.correo]
     });
-
+   
+    })
   }
 
 }

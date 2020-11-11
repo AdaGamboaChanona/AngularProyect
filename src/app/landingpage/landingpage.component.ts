@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ServiceService} from '../service.service'
+import {AuthServiceService} from '../Auth/auth-service.service'
 
 @Component({
   selector: 'app-landingpage',
@@ -14,7 +14,7 @@ export class LandingpageComponent implements OnInit {
   info= "no hay datos";
   status:boolean=false;
   name:String='Mostrar';
-  constructor(private serviceService: ServiceService) { };
+  constructor(private serviceService: AuthServiceService) { };
 
   ngOnInit(): void {
     this.serviceService.getRegistro().subscribe((data:any[]) =>{

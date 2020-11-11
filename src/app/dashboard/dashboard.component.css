@@ -6,5 +6,19 @@
 
 table {
     width: 100%;
+    background: -webkit-linear-gradient(right, rgb(85, 3, 161), #e304eb);
+    
   }
 
+.body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background: -webkit-linear-gradient(right, rgb(54, 4, 4), #9c0101)
+}
+
+.example-full-width{
+    margin-right: 10px;
+}

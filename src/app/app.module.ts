@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 
@@ -51,7 +52,8 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms'
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

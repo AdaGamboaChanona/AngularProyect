@@ -65,7 +65,7 @@ export class AuthServiceService {
         'Authorization': 'Token '+ token
       })
     };
-    return this.httpClient.get(`${this.api}api/v1/dashboard/registrosEspecificosDash/`,httpOptions)
+    return this.httpClient.get(`${this.api}api/v1/dashboard/registrosEspecificosDash/${id}`,httpOptions)
 
   }
 
