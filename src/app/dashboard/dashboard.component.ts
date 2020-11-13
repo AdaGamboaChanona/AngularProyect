@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     console.log(id)
     this.serviceService.deleteRegistro(id).subscribe(access=>{
       console.log("Todo bien")
-      window.location.reload();
+      this._router.navigate(['/'])
     },error=>{
       console.log("Datos inválidos")
     })
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     const data = this.formRegister.value;
       if(data.nombreCompleto && data.edad && data.correo && this.update==true){
         this.serviceService.updateRegistro(this.id,data.nombreCompleto,data.edad,data.correo).subscribe(access=>{
-          window.location.reload();
+          this._router.navigate(['/'])
           this.update=false;
           console.log("cualquier cosa")
         },error=>{
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
     
       if(data.nombreCompleto && data.edad && data.correo && this.update==false){
         this.serviceService.addRegistro(data.nombreCompleto,data.edad,data.correo).subscribe(access=>{
-          window.location.reload();
+          this._router.navigate(['/'])
           console.log("otra cosa")
         },error=>{
           console.log("Datos inválidos")

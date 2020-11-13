@@ -93,6 +93,17 @@ export class AuthServiceService {
     return this.httpClient.put(`${this.api}api/v1/dashboard/registrosEspecificosDash/${id}`,{nombreCompleto,edad,correo},httpOptions);
   }
 
+  register(username: string, email: string, password1: string, password2: string): Observable<any> {
+    console.log(username)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.httpClient.post(`${this.api}api/v1/login/rest-auth/registration/`, { username, email, password1, password2 }, httpOptions);
+  }
+
+
   async loginGoogle( ){
     try {
       return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider())
