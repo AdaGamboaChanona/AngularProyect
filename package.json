@@ -18,12 +18,9 @@
     "@angular/cdk": "^10.2.5",
     "@angular/common": "~10.1.0",
     "@angular/compiler": "~10.1.0",
-<<<<<<< HEAD
     "@angular/core": "^10.1.6",
-=======
     "@angular/core": "~10.1.0",
     "@angular/fire": "^6.0.3",
->>>>>>> 9edba576e3a234757db3f6c97257f2c70f471ccf
     "@angular/forms": "~10.1.0",
     "@angular/material": "^10.2.5",
     "@angular/platform-browser": "~10.1.0",
