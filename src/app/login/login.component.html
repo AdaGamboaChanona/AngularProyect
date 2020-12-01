@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="main-div">
+    <mat-card>
+        <form class="login-form" [formGroup]='loginFormGroup'>
+            <h1>Login</h1>
+            <mat-form-field class="example-full-width">
+                <mat-label>user</mat-label>
+                <input matInput placeholder="Ex. user123" formControlName="user">
+              </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>password</mat-label>
+                <input matInput type="password" formControlName="password" >
+              </mat-form-field>
+            <br>
+            <p>¿Olvidaste tu contraseña?</p>
+              <br>
+            <a routerLink="/Register">¿No tienes una cuenta? Registrate!</a>
+            <button class="example-full-width" mat-raised-button color="primary" (click)='login()' [disabled]='loginFormGroup.invalid'>Iniciar sesión</button>
+            <br>
+            <br>
+            <button class="example-full-width" mat-raised-button color="primary" id="botonGoogle" (click)='loginGoogle()'>Iniciar con google</button>
+        </form>
+    </mat-card>
+</div>
+
+
