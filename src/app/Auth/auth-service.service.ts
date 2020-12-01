@@ -9,7 +9,7 @@ import { auth, User } from 'firebase/app';
 })
 export class AuthServiceService {
   public usuario: User;
-  api:String="http://web-ada.ddns.net:4200/";
+  api:String="http://web-ada.ddns.net/";
   constructor(private httpClient:HttpClient, private afAuth : AngularFireAuth) { }
 
   isAuthenticated():Boolean {
