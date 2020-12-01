@@ -9,7 +9,7 @@ import { auth, User } from 'firebase/app';
 })
 export class AuthServiceService {
   public usuario: User;
-  api:String="https://back-web-ids-ada-chanona.herokuapp.com/";
+  api:String="http://54.167.94.143/";
   constructor(private httpClient:HttpClient, private afAuth : AngularFireAuth) { }
 
   isAuthenticated():Boolean {
